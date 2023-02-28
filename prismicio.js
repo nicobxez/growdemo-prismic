@@ -1,7 +1,7 @@
-import * as prismic from "@prismicio/client";
-import * as prismicNext from "@prismicio/next";
+import * as prismic from '@prismicio/client';
+import * as prismicNext from '@prismicio/next';
 
-import sm from "./sm.json";
+import sm from './sm.json';
 
 /**
  * The project's Prismic repository name.
@@ -14,14 +14,14 @@ export const repositoryName = prismic.getRepositoryName(sm.apiEndpoint);
  * @type {prismic.ClientConfig['routes']}
  */
 const routes = [
-  {
-    type: "article",
-    path: "/articles/:uid",
-  },
-  {
-    type: "page",
-    path: "/:uid",
-  },
+	{
+		type: 'article',
+		path: '/articles/:uid',
+	},
+	{
+		type: 'page',
+		path: '/:uid',
+	},
 ];
 
 /**
@@ -31,12 +31,12 @@ const routes = [
  * @param config {prismicNext.CreateClientConfig} - A configuration object to
  */
 export const createClient = ({ previewData, req, ...config } = {}) => {
-  const client = prismic.createClient(sm.apiEndpoint, {
-    routes,
-    ...config,
-  });
+	const client = prismic.createClient(sm.apiEndpoint, {
+		routes,
+		...config,
+	});
 
-  prismicNext.enableAutoPreviews({ client, previewData, req });
+	prismicNext.enableAutoPreviews({ client, previewData, req });
 
-  return client;
+	return client;
 };
