@@ -8,8 +8,8 @@
       "name": {
         "type": "StructuredText",
         "config": {
-          "label": "Name",
-          "placeholder": "Name of your blog (e.g. your name)",
+          "label": "Nombre de tu app",
+          "placeholder": "Nombre de tu app (ej: Prismic)",
           "allowTargetBlank": false,
           "single": "heading1"
         }
@@ -17,16 +17,16 @@
       "description": {
         "type": "StructuredText",
         "config": {
-          "label": "Description",
-          "placeholder": "Short description of your blog",
+          "label": "Descripción ",
+          "placeholder": "Breve descripción de tu app",
           "allowTargetBlank": false,
           "single": "paragraph"
         }
       },
-      "profilePicture": {
+      "banner": {
         "type": "Image",
         "config": {
-          "label": "Profile Picture",
+          "label": "Foto de portada",
           "constraint": {
             "width": 2000,
             "height": 2000
@@ -34,22 +34,22 @@
           "thumbnails": []
         }
       },
-      "newsletterDescription": {
+      "formTitle": {
         "type": "StructuredText",
         "config": {
-          "label": "Newsletter Description",
-          "placeholder": "Text above the sign up form",
+          "label": "Titulo de formulario",
+          "placeholder": "Texto para título de suscripción",
           "allowTargetBlank": true,
-          "multi": "heading1,paragraph,strong,em,hyperlink,list-item,o-list-item"
+          "multi": "paragraph,heading1,strong,em,hyperlink,list-item,o-list-item"
         }
       },
-      "newsletterDisclaimer": {
+      "formDescription": {
         "type": "StructuredText",
         "config": {
-          "label": "Newsletter Disclaimer",
-          "placeholder": "Small text below sign up form",
+          "label": "Descripción de formulario",
+          "placeholder": "Texto acerca de suscripción",
           "allowTargetBlank": true,
-          "multi": "paragraph,em,strong,hyperlink"
+          "multi": "paragraph,strong,em,hyperlink"
         }
       }
     }

@@ -172,10 +172,10 @@ export type PageDocument<Lang extends string = string> = prismicT.PrismicDocumen
 /** Content for Settings documents */
 interface SettingsDocumentData {
     /**
-     * Name field in *Settings*
+     * Nombre de tu app field in *Settings*
      *
      * - **Field Type**: Title
-     * - **Placeholder**: Name of your blog (e.g. your name)
+     * - **Placeholder**: Nombre de tu app (ej: Prismic)
      * - **API ID Path**: settings.name
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
@@ -183,10 +183,10 @@ interface SettingsDocumentData {
      */
     name: prismicT.TitleField;
     /**
-     * Description field in *Settings*
+     * Descripción  field in *Settings*
      *
      * - **Field Type**: Rich Text
-     * - **Placeholder**: Short description of your blog
+     * - **Placeholder**: Breve descripción de tu app
      * - **API ID Path**: settings.description
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
@@ -194,38 +194,38 @@ interface SettingsDocumentData {
      */
     description: prismicT.RichTextField;
     /**
-     * Profile Picture field in *Settings*
+     * Foto de portada field in *Settings*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: settings.profilePicture
+     * - **API ID Path**: settings.banner
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/image
      *
      */
-    profilePicture: prismicT.ImageField<never>;
+    banner: prismicT.ImageField<never>;
     /**
-     * Newsletter Description field in *Settings*
+     * Titulo de formulario field in *Settings*
      *
      * - **Field Type**: Rich Text
-     * - **Placeholder**: Text above the sign up form
-     * - **API ID Path**: settings.newsletterDescription
+     * - **Placeholder**: Texto para título de suscripción
+     * - **API ID Path**: settings.formTitle
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
      *
      */
-    newsletterDescription: prismicT.RichTextField;
+    formTitle: prismicT.RichTextField;
     /**
-     * Newsletter Disclaimer field in *Settings*
+     * Descripción de formulario field in *Settings*
      *
      * - **Field Type**: Rich Text
-     * - **Placeholder**: Small text below sign up form
-     * - **API ID Path**: settings.newsletterDisclaimer
+     * - **Placeholder**: Texto acerca de suscripción
+     * - **API ID Path**: settings.formDescription
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
      *
      */
-    newsletterDisclaimer: prismicT.RichTextField;
+    formDescription: prismicT.RichTextField;
 }
 /**
  * Settings document from Prismic

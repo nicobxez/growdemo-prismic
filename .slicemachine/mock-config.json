@@ -33,25 +33,25 @@
       }
     },
     "settings": {
-      "name": {
-        "config": {
-          "patternType": "HEADING",
-          "blocks": 1
-        }
-      },
       "description": {
         "config": {
           "patternType": "PARAGRAPH",
           "blocks": 1
         }
       },
-      "newsletterDescription": {
+      "name": {
+        "config": {
+          "patternType": "HEADING",
+          "blocks": 1
+        }
+      },
+      "formTitle": {
         "config": {
           "patternType": "PARAGRAPH",
           "blocks": 1
         }
       },
-      "newsletterDisclaimer": {
+      "formDescription": {
         "config": {
           "patternType": "PARAGRAPH",
           "blocks": 1

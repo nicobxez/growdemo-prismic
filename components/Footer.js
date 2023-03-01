@@ -11,12 +11,12 @@ const SignUpForm = ({ settings }) => {
 			<form
 				action="/api/sign-up"
 				method="post"
-				className="grid w-full max-w-xl grid-cols-1 gap-6"
+				className="grid w-full max-w-2xl grid-cols-1 gap-6"
 			>
-				{prismicH.isFilled.richText(settings.data.newsletterDisclaimer) && (
+				{prismicH.isFilled.richText(settings.data.formDescription) && (
 					<div className="text-center font-serif tracking-tight text-slate-500">
 						<PrismicRichText
-							field={settings.data.newsletterDescription}
+							field={settings.data.formTitle}
 							components={{
 								heading1: ({ children }) => (
 									<Heading as="h2" className="mb-4 last:mb-0">
@@ -50,9 +50,9 @@ const SignUpForm = ({ settings }) => {
 							<span aria-hidden={true}>&rarr;</span>
 						</button>
 					</div>
-					{prismicH.isFilled.richText(settings.data.newsletterDisclaimer) && (
+					{prismicH.isFilled.richText(settings.data.formDescription) && (
 						<p className="text-center text-xs tracking-tight text-slate-500">
-							<PrismicText field={settings.data.newsletterDisclaimer} />
+							<PrismicText field={settings.data.formDescription} />
 						</p>
 					)}
 				</div>
@@ -64,10 +64,10 @@ const SignUpForm = ({ settings }) => {
 export const Footer = ({ withSignUpForm = true, settings }) => {
 	return (
 		<Bounded as="footer">
-			<div className="grid grid-cols-1 justify-items-center gap-24">
+			<div className="flex flex-col items-center gap-24">
 				<HorizontalDivider />
 				{withSignUpForm && <SignUpForm settings={settings} />}
-				<div className="mx-auto w-full max-w-3xl text-center text-xs font-semibold tracking-tight text-slate-500">
+				<div className="mx-auto w-full max-w-3xl text-center text-xs font-semibold tracking-tight text-slate-500 ">
 					Orgullosamente publicado por Nico Baez utilizando{' '}
 					<PrismicLink href="https://prismic.io" className="text-slate-700">
 						Prismic
