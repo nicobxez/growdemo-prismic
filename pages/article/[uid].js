@@ -9,7 +9,7 @@ import { Bounded } from '../../components/Bounded';
 import { Heading } from '../../components/Heading';
 import { HorizontalDivider } from '../../components/HorizontalDivider';
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
+const dateFormatter = new Intl.DateTimeFormat('es-ES', {
 	month: 'short',
 	day: 'numeric',
 	year: 'numeric',
@@ -49,10 +49,10 @@ const Article = ({ article, latestArticles, navigation, settings }) => {
 			</Head>
 			<Bounded>
 				<PrismicLink
-					href="/"
+					href="/articles"
 					className="font-semibold tracking-tight text-slate-400"
 				>
-					&larr; Back to articles
+					&larr; Volver a artículos
 				</PrismicLink>
 			</Bounded>
 			<article>
@@ -72,7 +72,7 @@ const Article = ({ article, latestArticles, navigation, settings }) => {
 						<HorizontalDivider />
 						<div className="w-full">
 							<Heading size="2xl" className="mb-10">
-								Latest articles
+								Novedades
 							</Heading>
 							<ul className="grid grid-cols-1 gap-12">
 								{latestArticles.map(article => (

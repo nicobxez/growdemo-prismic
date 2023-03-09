@@ -4,7 +4,7 @@ import { PrismicNextImage } from '@prismicio/next';
 
 import { Heading } from './Heading';
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
+const dateFormatter = new Intl.DateTimeFormat('es-ES', {
 	month: 'short',
 	day: 'numeric',
 	year: 'numeric',

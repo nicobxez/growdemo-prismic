@@ -7,7 +7,6 @@ import { Layout } from '../components/Layout';
 import { Banner } from '../components/Banner';
 import { Bounded } from '../components/Bounded';
 import { ArticlePreview } from '../components/ArticlePreview';
-import { HorizontalDivider } from '../components/HorizontalDivider';
 
 const Index = ({ latestArticles, navigation, settings }) => {
 	return (
@@ -24,9 +23,9 @@ const Index = ({ latestArticles, navigation, settings }) => {
 				/>
 
 				<Bounded size="widest">
-					<p className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+					<h2 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
 						Novedades
-					</p>
+					</h2>
 					<hr className="mb-5 h-px w-full border-0 bg-slate-200" />
 					<ul className="grid grid-cols-1 gap-16">
 						{latestArticles.map(article => (
@@ -36,9 +35,9 @@ const Index = ({ latestArticles, navigation, settings }) => {
 				</Bounded>
 
 				<Bounded size="widest">
-					<p className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+					<h2 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
 						Productos populares
-					</p>
+					</h2>
 					<hr className="mb-5 h-px w-full border-0 bg-slate-200" />
 					<ul className="grid grid-cols-1 gap-16">
 						{latestArticles.map(article => (
