@@ -1,27 +1,47 @@
 import Head from 'next/head';
 import * as prismicH from '@prismicio/helpers';
-
+import { PrismicText } from '@prismicio/react';
 import { createClient } from '../prismicio';
+
 import { Layout } from '../components/Layout';
 import { Banner } from '../components/Banner';
 import { Bounded } from '../components/Bounded';
 import { ArticlePreview } from '../components/ArticlePreview';
+import { HorizontalDivider } from '../components/HorizontalDivider';
 
-const Index = ({ articles, navigation, settings }) => {
+const Index = ({ latestArticles, navigation, settings }) => {
 	return (
 		<>
 			<Layout navigation={navigation} settings={settings}>
 				<Head>
 					<title>{prismicH.asText(settings.data.name)}</title>
 				</Head>
+
 				<Banner
 					name={settings.data.name}
 					description={settings.data.description}
 					banner={settings.data.banner}
 				/>
+
 				<Bounded size="widest">
+					<p className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+						Novedades
+					</p>
+					<hr className="mb-5 h-px w-full border-0 bg-slate-200" />
 					<ul className="grid grid-cols-1 gap-16">
-						{articles.map(article => (
+						{latestArticles.map(article => (
+							<ArticlePreview key={article.id} article={article} />
+						))}
+					</ul>
+				</Bounded>
+
+				<Bounded size="widest">
+					<p className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+						Productos populares
+					</p>
+					<hr className="mb-5 h-px w-full border-0 bg-slate-200" />
+					<ul className="grid grid-cols-1 gap-16">
+						{latestArticles.map(article => (
 							<ArticlePreview key={article.id} article={article} />
 						))}
 					</ul>
@@ -35,8 +55,8 @@ export default Index;
 
 export async function getStaticProps({ previewData }) {
 	const client = createClient({ previewData });
-
-	const articles = await client.getAllByType('article', {
+	const latestArticles = await client.getAllByType('article', {
+		limit: 3,
 		orderings: [
 			{ field: 'my.article.publishDate', direction: 'desc' },
 			{ field: 'document.first_publication_date', direction: 'desc' },
@@ -47,7 +67,7 @@ export async function getStaticProps({ previewData }) {
 
 	return {
 		props: {
-			articles,
+			latestArticles,
 			navigation,
 			settings,
 		},
