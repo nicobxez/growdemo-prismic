@@ -9,6 +9,8 @@ import { Bounded } from '../../components/Bounded';
 import { Heading } from '../../components/Heading';
 import { HorizontalDivider } from '../../components/HorizontalDivider';
 
+const priceFormatter = new Intl.NumberFormat('de-DE');
+
 const PopularProduct = ({ product }) => {
 	return (
 		<li>
@@ -18,7 +20,7 @@ const PopularProduct = ({ product }) => {
 				</PrismicLink>
 			</h1>
 			<p className="font-serif italic tracking-tighter text-slate-500">
-				{`$${product.data.price}`}
+				{`$${priceFormatter.format(product.data.price)}`}
 			</p>
 		</li>
 	);
@@ -47,7 +49,7 @@ const Product = ({ product, popularProducts, navigation, settings }) => {
 						<PrismicText field={product.data.title} />
 					</h1>
 					<p className="font-serif italic tracking-tighter text-slate-500">
-						{`$${product.data.price}`}
+						{`$${priceFormatter.format(product.data.price)}`}
 					</p>
 				</Bounded>
 				<SliceZone slices={product.data.slices} components={components} />

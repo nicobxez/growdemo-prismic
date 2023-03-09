@@ -63,7 +63,7 @@ export async function getStaticProps({ params, previewData }) {
 	});
 
 	const products = await client.getAllByType('product', {
-		orderings: [{ field: 'my.product.title', direction: 'desc' }],
+		orderings: [{ field: 'my.product.title' }],
 	});
 
 	return {

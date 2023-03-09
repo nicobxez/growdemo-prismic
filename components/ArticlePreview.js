@@ -10,6 +10,8 @@ const dateFormatter = new Intl.DateTimeFormat('es-ES', {
 	year: 'numeric',
 });
 
+const priceFormatter = new Intl.NumberFormat('de-DE');
+
 const findFirstImage = slices => {
 	const imageSlice = slices.find(slice => slice.slice_type === 'image');
 
@@ -65,7 +67,7 @@ export const ArticlePreview = ({ article }) => {
 				<p className="font-serif italic tracking-tighter text-slate-500">
 					{article.type === 'article'
 						? dateFormatter.format(date)
-						: `$${article.data.price}`}
+						: `$${priceFormatter.format(article.data.price)}`}
 				</p>
 				{excerpt && (
 					<p className="font-serif leading-relaxed md:text-lg md:leading-relaxed">

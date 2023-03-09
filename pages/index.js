@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import * as prismicH from '@prismicio/helpers';
-import { PrismicText } from '@prismicio/react';
 import { createClient } from '../prismicio';
 
 import { Layout } from '../components/Layout';
