@@ -63,7 +63,9 @@ export const ArticlePreview = ({ article }) => {
 					</PrismicLink>
 				</Heading>
 				<p className="font-serif italic tracking-tighter text-slate-500">
-					{dateFormatter.format(date)}
+					{article.type === 'article'
+						? dateFormatter.format(date)
+						: `$${article.data.price}`}
 				</p>
 				{excerpt && (
 					<p className="font-serif leading-relaxed md:text-lg md:leading-relaxed">

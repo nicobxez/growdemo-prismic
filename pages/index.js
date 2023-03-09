@@ -8,7 +8,7 @@ import { Banner } from '../components/Banner';
 import { Bounded } from '../components/Bounded';
 import { ArticlePreview } from '../components/ArticlePreview';
 
-const Index = ({ latestArticles, navigation, settings }) => {
+const Index = ({ latestArticles, popularProducts, navigation, settings }) => {
 	return (
 		<>
 			<Layout navigation={navigation} settings={settings}>
@@ -40,8 +40,8 @@ const Index = ({ latestArticles, navigation, settings }) => {
 					</h2>
 					<hr className="mb-5 h-px w-full border-0 bg-slate-200" />
 					<ul className="grid grid-cols-1 gap-16">
-						{latestArticles.map(article => (
-							<ArticlePreview key={article.id} article={article} />
+						{popularProducts.map(product => (
+							<ArticlePreview key={product.id} article={product} />
 						))}
 					</ul>
 				</Bounded>
@@ -54,6 +54,9 @@ export default Index;
 
 export async function getStaticProps({ previewData }) {
 	const client = createClient({ previewData });
+	const navigation = await client.getSingle('navigation');
+	const settings = await client.getSingle('settings');
+
 	const latestArticles = await client.getAllByType('article', {
 		limit: 3,
 		orderings: [
@@ -61,12 +64,16 @@ export async function getStaticProps({ previewData }) {
 			{ field: 'document.first_publication_date', direction: 'desc' },
 		],
 	});
-	const navigation = await client.getSingle('navigation');
-	const settings = await client.getSingle('settings');
+
+	const popularProducts = await client.getAllByType('product', {
+		limit: 4,
+		orderings: [{ field: 'my.product.rating', direction: 'desc' }],
+	});
 
 	return {
 		props: {
 			latestArticles,
+			popularProducts,
 			navigation,
 			settings,
 		},

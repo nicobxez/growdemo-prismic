@@ -169,6 +169,79 @@ type PageDocumentDataSlicesSlice = ImageSlice | QuoteSlice | TextSlice | Contact
  * @typeParam Lang - Language API ID of the document.
  */
 export type PageDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+/** Content for Product documents */
+interface ProductDocumentData {
+    /**
+     * Title field in *Product*
+     *
+     * - **Field Type**: Title
+     * - **Placeholder**: Title of the product
+     * - **API ID Path**: product.title
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.TitleField;
+    /**
+     * Price field in *Product*
+     *
+     * - **Field Type**: Number
+     * - **Placeholder**: Price for the product
+     * - **API ID Path**: product.price
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/number
+     *
+     */
+    price: prismicT.NumberField;
+    /**
+     * Rating field in *Product*
+     *
+     * - **Field Type**: Number
+     * - **Placeholder**: How popular is your product
+     * - **API ID Path**: product.rating
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/number
+     *
+     */
+    rating: prismicT.NumberField;
+    /**
+     * Featured Image field in *Product*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: product.featuredImage
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    featuredImage: prismicT.ImageField<never>;
+    /**
+     * Slice Zone field in *Product*
+     *
+     * - **Field Type**: Slice Zone
+     * - **Placeholder**: *None*
+     * - **API ID Path**: product.slices[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     *
+     */
+    slices: prismicT.SliceZone<ProductDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *Product → Slice Zone*
+ *
+ */
+type ProductDocumentDataSlicesSlice = ContactFormSlice | ImageSlice | QuoteSlice | TextSlice;
+/**
+ * Product document from Prismic
+ *
+ * - **API ID**: `product`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProductDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<ProductDocumentData>, "product", Lang>;
 /** Content for Settings documents */
 interface SettingsDocumentData {
     /**
@@ -237,7 +310,7 @@ interface SettingsDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type SettingsDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<SettingsDocumentData>, "settings", Lang>;
-export type AllDocumentTypes = ArticleDocument | NavigationDocument | PageDocument | SettingsDocument;
+export type AllDocumentTypes = ArticleDocument | NavigationDocument | PageDocument | ProductDocument | SettingsDocument;
 /**
  * Default variation for ContactForm Slice
  *
@@ -438,6 +511,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { ArticleDocumentData, ArticleDocumentDataSlicesSlice, ArticleDocument, NavigationDocumentData, NavigationDocumentDataLinksItem, NavigationDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, SettingsDocumentData, SettingsDocument, AllDocumentTypes, ContactFormSliceDefault, ContactFormSliceVariation, ContactFormSlice, ImageSliceDefaultPrimary, ImageSliceDefault, ImageSliceWidePrimary, ImageSliceWide, ImageSliceVariation, ImageSlice, QuoteSliceDefaultPrimary, QuoteSliceDefault, QuoteSliceVariation, QuoteSlice, TextSliceDefaultPrimary, TextSliceDefault, TextSliceVariation, TextSlice };
+        export type { ArticleDocumentData, ArticleDocumentDataSlicesSlice, ArticleDocument, NavigationDocumentData, NavigationDocumentDataLinksItem, NavigationDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, ProductDocumentData, ProductDocumentDataSlicesSlice, ProductDocument, SettingsDocumentData, SettingsDocument, AllDocumentTypes, ContactFormSliceDefault, ContactFormSliceVariation, ContactFormSlice, ImageSliceDefaultPrimary, ImageSliceDefault, ImageSliceWidePrimary, ImageSliceWide, ImageSliceVariation, ImageSlice, QuoteSliceDefaultPrimary, QuoteSliceDefault, QuoteSliceVariation, QuoteSlice, TextSliceDefaultPrimary, TextSliceDefault, TextSliceVariation, TextSlice };
     }
 }

@@ -9,74 +9,60 @@ import { Bounded } from '../../components/Bounded';
 import { Heading } from '../../components/Heading';
 import { HorizontalDivider } from '../../components/HorizontalDivider';
 
-const dateFormatter = new Intl.DateTimeFormat('es-ES', {
-	month: 'short',
-	day: 'numeric',
-	year: 'numeric',
-});
-
-const LatestArticle = ({ article }) => {
-	const date = prismicH.asDate(
-		article.data.publishDate || article.first_publication_date
-	);
-
+const PopularProduct = ({ product }) => {
 	return (
 		<li>
 			<h1 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
-				<PrismicLink document={article}>
-					<PrismicText field={article.data.title} />
+				<PrismicLink document={product}>
+					<PrismicText field={product.data.title} />
 				</PrismicLink>
 			</h1>
 			<p className="font-serif italic tracking-tighter text-slate-500">
-				{dateFormatter.format(date)}
+				{`$${product.data.price}`}
 			</p>
 		</li>
 	);
 };
 
-const Article = ({ article, latestArticles, navigation, settings }) => {
-	const date = prismicH.asDate(
-		article.data.publishDate || article.first_publication_date
-	);
-
+const Product = ({ product, popularProducts, navigation, settings }) => {
 	return (
 		<Layout navigation={navigation} settings={settings}>
 			<Head>
 				<title>
-					{prismicH.asText(article.data.title)} |{' '}
+					{prismicH.asText(product.data.title)} |{' '}
 					{prismicH.asText(settings.data.name)}
 				</title>
 			</Head>
 			<Bounded>
 				<PrismicLink
-					href="/articles"
+					href="/products"
 					className="font-semibold tracking-tight text-slate-400"
 				>
-					&larr; Volver a blog
+					&larr; Volver a tienda
 				</PrismicLink>
 			</Bounded>
 			<article>
 				<Bounded className="pb-0">
 					<h1 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
-						<PrismicText field={article.data.title} />
+						<PrismicText field={product.data.title} />
 					</h1>
 					<p className="font-serif italic tracking-tighter text-slate-500">
-						{dateFormatter.format(date)}
+						{`$${product.data.price}`}
 					</p>
 				</Bounded>
-				<SliceZone slices={article.data.slices} components={components} />
+				<SliceZone slices={product.data.slices} components={components} />
 			</article>
-			{latestArticles.length > 0 && (
+			{popularProducts.length > 0 && (
 				<Bounded>
 					<div className="grid grid-cols-1 justify-items-center gap-16 md:gap-24">
 						<HorizontalDivider />
 						<div className="w-full">
 							<Heading size="2xl" className="mb-10">
-								Novedades
+								Productos populares
 							</Heading>
 							<ul className="grid grid-cols-1 gap-12">
-								{latestArticles.map(article => (
-									<LatestArticle key={article.id} article={article} />
+								{popularProducts.map(product => (
+									<PopularProduct key={product.id} product={product} />
 								))}
 							</ul>
 						</div>
@@ -87,26 +73,23 @@ const Article = ({ article, latestArticles, navigation, settings }) => {
 	);
 };
 
-export default Article;
+export default Product;
 
 export async function getStaticProps({ params, previewData }) {
 	const client = createClient({ previewData });
 
-	const article = await client.getByUID('article', params.uid);
-	const latestArticles = await client.getAllByType('article', {
-		limit: 3,
-		orderings: [
-			{ field: 'my.article.publishDate', direction: 'desc' },
-			{ field: 'document.first_publication_date', direction: 'desc' },
-		],
+	const product = await client.getByUID('product', params.uid);
+	const popularProducts = await client.getAllByType('product', {
+		limit: 4,
+		orderings: [{ field: 'my.product.rating', direction: 'desc' }],
 	});
 	const navigation = await client.getSingle('navigation');
 	const settings = await client.getSingle('settings');
 
 	return {
 		props: {
-			article,
-			latestArticles,
+			product,
+			popularProducts,
 			navigation,
 			settings,
 		},
@@ -116,10 +99,10 @@ export async function getStaticProps({ params, previewData }) {
 export async function getStaticPaths() {
 	const client = createClient();
 
-	const articles = await client.getAllByType('article');
+	const products = await client.getAllByType('product');
 
 	return {
-		paths: articles.map(article => prismicH.asLink(article)),
+		paths: products.map(product => prismicH.asLink(product)),
 		fallback: false,
 	};
 }

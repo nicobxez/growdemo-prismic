@@ -9,7 +9,7 @@ import { Bounded } from '../components/Bounded';
 import { ArticlePreview } from '../components/ArticlePreview';
 import { Pagination } from '../components/Pagination';
 
-const Page = ({ page, navigation, settings, articles }) => {
+const Page = ({ page, navigation, settings, articles, products }) => {
 	return (
 		<Layout navigation={navigation} settings={settings}>
 			<Head>
@@ -26,6 +26,17 @@ const Page = ({ page, navigation, settings, articles }) => {
 					<ul className="grid grid-cols-1 gap-16">
 						{articles.map(article => (
 							<ArticlePreview key={article.id} article={article} />
+						))}
+					</ul>
+					<Pagination />
+				</Bounded>
+			)}
+
+			{page.uid === 'products' && (
+				<Bounded size="widest">
+					<ul className="grid grid-cols-1 gap-16">
+						{products.map(product => (
+							<ArticlePreview key={product.id} article={product} />
 						))}
 					</ul>
 					<Pagination />
@@ -51,12 +62,17 @@ export async function getStaticProps({ params, previewData }) {
 		],
 	});
 
+	const products = await client.getAllByType('product', {
+		orderings: [{ field: 'my.product.title', direction: 'desc' }],
+	});
+
 	return {
 		props: {
 			page,
 			navigation,
 			settings,
 			articles,
+			products,
 		},
 	};
 }

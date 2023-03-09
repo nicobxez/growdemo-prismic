@@ -57,7 +57,8 @@
           "blocks": 1
         }
       }
-    }
+    },
+    "product": {}
   },
   "slices": {
     "Text": {

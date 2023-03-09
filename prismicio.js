@@ -18,10 +18,10 @@ const routes = [
 		type: 'article',
 		path: '/article/:uid',
 	},
-	// {
-	// 	type: 'product',
-	// 	path: '/products/:uid',
-	// },
+	{
+		type: 'product',
+		path: '/product/:uid',
+	},
 	{
 		type: 'page',
 		path: '/:uid',
