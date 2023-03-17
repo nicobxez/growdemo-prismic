@@ -66,7 +66,10 @@ export async function getStaticProps({ previewData }) {
 
 	const popularProducts = await client.getAllByType('product', {
 		limit: 4,
-		orderings: [{ field: 'my.product.rating', direction: 'desc' }],
+		orderings: [
+			{ field: 'my.product.rating', direction: 'desc' },
+			{ field: 'my.product.title' },
+		],
 	});
 
 	return {
